@@ -1,6 +1,5 @@
 
-let humanScore = 0, computerScore = 0;
-
+var humanScore = 0, computerScore = 0;
 function getComputerChoice() {
     let num = Math.floor(Math.random() * 3);
     switch (num) {
@@ -53,12 +52,33 @@ function playRound(humanChoice, computerChoice) {
             else
                 break;
     }
-    console.log(humanChoice);
-    console.log(computerChoice);
-    console.log(humanScore, computerScore);
+
 }
-for (let i = 0; i < 5; i++) {
-    var computerChoice = getComputerChoice();
-    var humanChoice = getHumanChoice();
-    playRound(humanChoice, computerChoice);
+function playGame() {
+
+    for (let i = 0; i < 5; i++) {
+
+        var computerChoice = getComputerChoice();
+        var humanChoice = getHumanChoice();
+
+        playRound(humanChoice, computerChoice);
+        console.log(humanChoice);
+        console.log(computerChoice);
+        console.log(humanScore, computerScore);
+        if (humanScore > 3 || computerScore > 3) {
+            break;
+        }
+    }
+    if (humanScore > computerScore) {
+        console.log("human wins");
+    }
+    else if (humanScore < computerScore) {
+        console.log("computer wins");
+    }
+    else
+        console.log("tie");
+
 }
+playGame();
+
+
