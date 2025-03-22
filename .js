@@ -1,22 +1,37 @@
 
 var humanScore = 0, computerScore = 0;
+const computerSelection = document.querySelector("#computerChoice");
+const humanScorecard = document.querySelector("#humanScorecard");
+const compScorecard = document.querySelector("#compScorecard");
+
 function getComputerChoice() {
     let num = Math.floor(Math.random() * 3);
     switch (num) {
         case 0:
+            computerSelection.textContent = "rock";
             return "rock";
         case 1:
+            computerSelection.textContent = "paper";
             return "paper";
         case 2:
+            computerSelection.textContent = "scissors";
             return "scissor";
     }
 }
-function getHumanChoice() {
-    choice = prompt("Enter your choice").toLowerCase();
-    return choice
-}
+
+
+const choiceButton = document.querySelector(".humanChoice");
+choiceButton.addEventListener("click", (event) => {
+    humanChoice = event.target.textContent;
+    computerChoice = getComputerChoice();
+    playRound(humanChoice, computerChoice);
+    humanScorecard.textContent = `Your score:${humanScore}`;
+    compScorecard.textContent = `Computer score:${computerScore}`;
+});
+
 
 function playRound(humanChoice, computerChoice) {
+
     switch (humanChoice) {
         case "rock":
             if (computerChoice == "scissor") {
@@ -52,33 +67,7 @@ function playRound(humanChoice, computerChoice) {
             else
                 break;
     }
-
 }
-function playGame() {
 
-    for (let i = 0; i < 5; i++) {
-
-        var computerChoice = getComputerChoice();
-        var humanChoice = getHumanChoice();
-
-        playRound(humanChoice, computerChoice);
-        console.log(humanChoice);
-        console.log(computerChoice);
-        console.log(humanScore, computerScore);
-        if (humanScore > 3 || computerScore > 3) {
-            break;
-        }
-    }
-    if (humanScore > computerScore) {
-        console.log("human wins");
-    }
-    else if (humanScore < computerScore) {
-        console.log("computer wins");
-    }
-    else
-        console.log("tie");
-
-}
-playGame();
 
 
