@@ -1,26 +1,23 @@
 
 var humanScore = 0, computerScore = 0;
+
 const computerSelection = document.querySelector("#computerChoice");
 const humanScorecard = document.querySelector("#humanScorecard");
 const compScorecard = document.querySelector("#compScorecard");
+const choiceButton = document.querySelector(".humanChoice");
 
 function getComputerChoice() {
-    let num = Math.floor(Math.random() * 3);
-    switch (num) {
-        case 0:
-            computerSelection.textContent = "rock";
-            return "rock";
-        case 1:
-            computerSelection.textContent = "paper";
-            return "paper";
-        case 2:
-            computerSelection.textContent = "scissors";
-            return "scissor";
-    }
+    const choices = ["rock", "paper", "scissor"];
+    const choice = choices[Math.floor(Math.random() * 3)];
+    computerSelection.textContent = choice;
+    return choice;
+}
+
+function declareWinner(winner) {
+    alert(`Gameover ${winner} wins`);
 }
 
 
-const choiceButton = document.querySelector(".humanChoice");
 choiceButton.addEventListener("click", (event) => {
     humanChoice = event.target.textContent;
     computerChoice = getComputerChoice();
@@ -29,9 +26,7 @@ choiceButton.addEventListener("click", (event) => {
     compScorecard.textContent = `Computer score:${computerScore}`;
 });
 
-
 function playRound(humanChoice, computerChoice) {
-
     switch (humanChoice) {
         case "rock":
             if (computerChoice == "scissor") {
@@ -67,6 +62,10 @@ function playRound(humanChoice, computerChoice) {
             else
                 break;
     }
+    if (computerScore === 5)
+        declareWinner("computer");
+    else if (humanScore === 5)
+        declareWinner("Human");
 }
 
 
